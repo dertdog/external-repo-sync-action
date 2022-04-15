@@ -205,6 +205,7 @@ function git_pull_to_dir -a "user" "email" "repo_url" "branch" "target_dir" "dry
         git clone -b "$branch" "$repo_url" --depth=1 .
         and git config user.email "$email"
         and git config user.name "$user"
+        and git config --global --add safe.directory /github/workspace # Fix for the unsafe repo error: https://github.com/dertdog/external-repo-sync-action/issues/1
         or begin; error "Error during pulling"; exit 1; end
     else
         inform "Using dry-run, no repo data will be pulled."
